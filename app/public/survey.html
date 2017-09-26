@@ -10,7 +10,7 @@
         text-size:15px;
       }
 
-      h4{
+      h3{
         text-weight:bold;
       }
       button {
@@ -24,14 +24,14 @@
       <hr/>
       <h3>About You</h3>
       <form class="form">
-        Name (Required) <br/>
+        <h4 id="name">Name (Required)</h4> <br/>
         <input type="text" required> <br/>
-        Link to Photo (Required) <br />
+        <h4 id="photo">Link to Photo (Required)</h4> <br />
         <input type="text" required>
         <hr>
         <h3>Question 1</h3>
         <h4>You are an idealist</h4>
-        <select data-placeholder class="chosen-select">
+        <select id="q1" data-placeholder class="chosen-select">
           <option disabled selected value> -- select an option -- </option>
           <option value="1">1 (Strongly Disagree!)</option>
           <option value="2">2</option>
@@ -41,7 +41,7 @@
         </select>
         <h3>Question 2</h3>
         <h4>Generally speaking, you rely more on your experience than your imagination.</h4>
-        <select data-placeholder class="chosen-select">
+        <select id="q2" data-placeholder class="chosen-select">
           <option disabled selected value> -- select an option -- </option>
           <option value="1">1 (Strongly Disagree!)</option>
           <option value="2">2</option>
@@ -51,7 +51,7 @@
         </select>
         <h3>Question 3</h3>
         <h4>You have THE CHAIR in your room</h4>
-        <select data-placeholder class="chosen-select">
+        <select id="q3" data-placeholder class="chosen-select">
           <option disabled selected value> -- select an option -- </option>
           <option value="1">1 (Strongly Disagree!)</option>
           <option value="2">2</option>
@@ -61,7 +61,7 @@
         </select>
         <h3>Question 4</h3>
         <h4>You would rather go out to party than spend time at home.</h4>
-        <select data-placeholder class="chosen-select">
+        <select id="q4" data-placeholder class="chosen-select">
           <option disabled selected value> -- select an option -- </option>
           <option value="1">1 (Strongly Disagree!)</option>
           <option value="2">2</option>
@@ -71,7 +71,7 @@
         </select>
         <h3>Question 5</h3>
         <h4>You are the life of the party</h4>
-        <select data-placeholder class="chosen-select">
+        <select id="q5" data-placeholder class="chosen-select">
           <option disabled selected value> -- select an option -- </option>
           <option value="1">1 (Strongly Disagree!)</option>
           <option value="2">2</option>
@@ -81,7 +81,7 @@
         </select>
         <h3>Question 6</h3>
         <h4>Challenges and risks fulfill you.</h4>
-        <select data-placeholder class="chosen-select">
+        <select id="q6" data-placeholder class="chosen-select">
           <option disabled selected value> -- select an option -- </option>
           <option value="1">1 (Strongly Disagree!)</option>
           <option value="2">2</option>
@@ -91,7 +91,7 @@
         </select>
         <h3>Question 7</h3>
         <h4>You eat everything. It makes your grandma happy</h4>
-        <select data-placeholder class="chosen-select">
+        <select id="q7" data-placeholder class="chosen-select">
           <option disabled selected value> -- select an option -- </option>
           <option value="1">1 (Strongly Disagree!)</option>
           <option value="2">2</option>
@@ -101,7 +101,7 @@
         </select>
         <h3>Question 8</h3>
         <h4>You pour milk in the bowl first, then cereal.</h4>
-        <select data-placeholder class="chosen-select">
+        <select id="q8" data-placeholder class="chosen-select">
           <option disabled selected value> -- select an option -- </option>
           <option value="1">1 (Strongly Disagree!)</option>
           <option value="2">2</option>
@@ -111,7 +111,7 @@
         </select>
         <h3>Question 9</h3>
         <h4>You leave things until the last minute</h4>
-        <select data-placeholder class="chosen-select">
+        <select id="q9" data-placeholder class="chosen-select">
           <option disabled selected value> -- select an option -- </option>
           <option value="1">1 (Strongly Disagree!)</option>
           <option value="2">2</option>
@@ -121,7 +121,7 @@
         </select>
         <h3>Question 10</h3>
         <h4>People describe you as affectionate</h4>
-        <select data-placeholder class="chosen-select">
+        <select id="q10" data-placeholder class="chosen-select">
           <option disabled selected value> -- select an option -- </option>
           <option value="1">1 (Strongly Disagree!)</option>
           <option value="2">2</option>
@@ -140,4 +140,36 @@
         </div>
       </footer>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $("button").click(function(event){
+        event.preventDefault();
+
+        var newFriend = {
+          name: $("#name").val(),
+          photo: $("#photo").val(),
+          scores: [
+            $("#q1").find(":selected").text(),
+            $("#q2").find(":selected").text(),
+            $("#q3").find(":selected").text(),
+            $("#q4").find(":selected").text(),
+            $("#q5").find(":selected").text(),
+            $("#q6").find(":selected").text(),
+            $("#q7").find(":selected").text(),
+            $("#q8").find(":selected").text(),
+            $("#q9").find(":selected").text(),
+            $("#q10").find(":selected").text()
+          ]
+        }
+
+        console.log(newFriend);
+
+        $.post("../data/friends",function newFriend, function(data){
+          if(data) {
+            console.log("working");
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
